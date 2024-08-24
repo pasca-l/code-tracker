@@ -7,13 +7,9 @@ export function activate(context: vscode.ExtensionContext) {
   // console.log() will show on "DEBUG CONSOLE"
   console.log('"code-tracker" is active!');
 
-  const disposable = vscode.commands.registerCommand(
-    // The commandId parameter must match the command field in package.json
-    "code-tracker.helloWorld",
-    () => {
-      vscode.window.showInformationMessage("Hello World from code-tracker!");
-    }
-  );
+  const disposable = vscode.workspace.onDidChangeTextDocument((event) => {
+    console.log(event.document.languageId);
+  });
 
   context.subscriptions.push(disposable);
 }
